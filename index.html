@@ -183,13 +183,7 @@ function submitTest(auto=false){
   `;
 
   document.querySelectorAll("input").forEach(el=>el.disabled=true);
-  submitBtn.disabled=true;
-
-  if(auto){
-    // Browsers normally block window.close() unless this page was opened by script.
-    // Attempt it, then keep the completed result visible if the browser refuses.
-    try{ window.close(); }catch(e){}
-  }
+  // Hide entire test screen document.querySelector(".header").classList.add("hidden"); quiz.classList.add("hidden"); submitBtn.classList.add("hidden");  // Disable inputs document.querySelectorAll("input").forEach(el=>el.disabled=true);
 
   window.scrollTo({top:0,behavior:"smooth"});
 }
