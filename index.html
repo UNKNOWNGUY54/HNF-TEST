@@ -183,8 +183,9 @@ function submitTest(auto=false){
   `;
 
   document.querySelectorAll("input").forEach(el=>el.disabled=true);
-  // Hide entire test screen document.querySelector(".header").classList.add("hidden"); quiz.classList.add("hidden"); submitBtn.classList.add("hidden");  // Disable inputs document.querySelectorAll("input").forEach(el=>el.disabled=true);
-
+ document.querySelector(".header").classList.add("hidden");
+quiz.classList.add("hidden");
+submitBtn.classList.add("hidden");
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
