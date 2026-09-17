@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HNF Comprehensive Test - 66 MCQs</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#182230;--muted:#667085;--border:#d0d5dd;--green:#12b76a;--greenbg:#ecfdf3;--red:#f04438;--redbg:#fef3f2;--accent:#344054}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+.wrap{max-width:920px;margin:auto;padding:16px}
+.header{position:sticky;top:0;z-index:10;background:rgba(245,247,251,.97);padding:10px 0}
+.headcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px}
+.headrow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.title{font-size:20px;font-weight:800}
+.subtitle{font-size:13px;color:var(--muted);margin-top:4px}
+.timer{font-size:22px;font-weight:800;min-width:82px;text-align:center}
+.timer.danger{color:var(--red)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:12px 0}
+.topic{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-bottom:7px}
+.q{font-size:17px;font-weight:700;line-height:1.45;margin:0 0 12px}
+.opt{display:block;border:1px solid var(--border);border-radius:10px;padding:12px;margin:8px 0;cursor:pointer;background:#fff}
+.opt:hover{background:#f8fafc}
+.opt input{margin-right:8px}
+.btn{width:100%;border:0;border-radius:12px;background:#101828;color:#fff;padding:14px;font-size:17px;font-weight:700;cursor:pointer;margin:12px 0 20px}
+.btn:disabled{opacity:.55}
+#result{margin-top:12px}
+.resultbox{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin:14px 0}
+.score{font-size:28px;font-weight:800}
+.timeup{color:var(--red);font-weight:700}
+.stats{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.circle{width:116px;height:116px;border-radius:50%;display:grid;place-items:center;flex:none}
+.circle .inner{width:88px;height:88px;border-radius:50%;background:#fff;display:grid;place-items:center;text-align:center;font-weight:800}
+.circle.green{background:conic-gradient(var(--green) var(--p),#e5e7eb 0)}
+.circle.red{background:conic-gradient(var(--red) var(--p),#e5e7eb 0)}
+.review{margin-top:16px}
+.reviewitem{border:1px solid var(--border);border-radius:12px;padding:13px;margin:10px 0}
+.reviewitem.correct{border-left:5px solid var(--green);background:var(--greenbg)}
+.reviewitem.wrong{border-left:5px solid var(--red);background:var(--redbg)}
+.badge{display:inline-block;font-size:12px;font-weight:800;padding:4px 8px;border-radius:999px;margin-bottom:7px}
+.badge.correct{color:#067647;background:#d1fadf}
+.badge.wrong{color:#b42318;background:#fee4e2}
+.muted{color:var(--muted)}
+.hidden{display:none}
+@media(max-width:600px){
+ .wrap{padding:10px}
+ .title{font-size:17px}
+ .timer{font-size:20px}
+ .card{padding:14px}
+ .q{font-size:16px}
+ .circle{width:105px;height:105px}
+ .circle .inner{width:79px;height:79px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="headcard">
+      <div class="headrow">
+        <div>
+          <div class="title">HNF Comprehensive Test</div>
+          <div class="subtitle">66 MCQs • 1 mark each • 25-minute timer</div>
+        </div>
+        <div id="timer" class="timer" aria-live="polite">25:00</div>
+      </div>
+    </div>
+  </div>
+
+  <main id="quiz"></main>
+  <button id="submitBtn" class="btn" type="button">Submit Test</button>
+  <div id="result"></div>
+</div>
+
+<script>
+const questions=[{"n": 1, "topic": "Osteology of Head & Neck", "q": "Which type of joint is a suture?", "options": ["Fibrous", "Synovial", "Cartilaginous", "Ball and socket"], "answer": 0}, {"n": 2, "topic": "Osteology of Head & Neck", "q": "Pterion is clinically important because the middle meningeal artery lies deep to it.", "options": ["True", "False", "Only in children", "Only in mandible"], "answer": 0}, {"n": 3, "topic": "Osteology of Head & Neck", "q": "Which bone forms the forehead?", "options": ["Frontal bone", "Temporal bone", "Parietal bone", "Occipital bone"], "answer": 0}, {"n": 4, "topic": "The Scalp, Face & Lacrimal Apparatus", "q": "The scalp is classically described in how many layers?", "options": ["Five", "Three", "Seven", "Two"], "answer": 0}, {"n": 5, "topic": "The Scalp, Face & Lacrimal Apparatus", "q": "Which cranial nerve supplies muscles of facial expression?", "options": ["Facial nerve", "Trigeminal nerve", "Vagus nerve", "Hypoglossal nerve"], "answer": 0}, {"n": 6, "topic": "The Scalp, Face & Lacrimal Apparatus", "q": "The facial artery is a branch of the:", "options": ["External carotid artery", "Internal carotid artery", "Maxillary artery", "Subclavian artery"], "answer": 0}, {"n": 7, "topic": "The Side of the Neck", "q": "The cervical plexus is formed by anterior rami of:", "options": ["C1-C4", "C5-T1", "T1-T4", "L1-L4"], "answer": 0}, {"n": 8, "topic": "The Side of the Neck", "q": "Ansa cervicalis mainly supplies which group of muscles?", "options": ["Infrahyoid muscles", "Muscles of mastication", "Extraocular muscles", "Muscles of tongue"], "answer": 0}, {"n": 9, "topic": "The Side of the Neck", "q": "Sternocleidomastoid is supplied by the:", "options": ["Accessory nerve", "Facial nerve", "Hypoglossal nerve", "Phrenic nerve"], "answer": 0}, {"n": 10, "topic": "The Back of the Neck", "q": "The posterior triangle of the neck is bounded anteriorly by the:", "options": ["Posterior border of sternocleidomastoid", "Anterior border of sternocleidomastoid", "Mandible", "Trapezius only"], "answer": 0}, {"n": 11, "topic": "The Back of the Neck", "q": "The suboccipital triangle contains the:", "options": ["Vertebral artery", "Facial artery", "Internal carotid artery", "External jugular vein"], "answer": 0}, {"n": 12, "topic": "The Back of the Neck", "q": "Trapezius is supplied motorically mainly by the:", "options": ["Accessory nerve", "Vagus nerve", "Facial nerve", "Phrenic nerve"], "answer": 0}, {"n": 13, "topic": "Contents of Vertebral Canal", "q": "The vertebral canal contains the:", "options": ["Spinal cord and its meninges", "Thyroid gland", "Carotid artery only", "Parotid gland"], "answer": 0}, {"n": 14, "topic": "Contents of Vertebral Canal", "q": "Which meninx lies directly on the spinal cord?", "options": ["Pia mater", "Dura mater", "Arachnoid mater", "Pericardium"], "answer": 0}, {"n": 15, "topic": "Contents of Vertebral Canal", "q": "The descending tracts of the spinal cord carry mainly:", "options": ["Motor impulses", "Only smell", "Only vision", "Digestive enzymes"], "answer": 0}, {"n": 16, "topic": "The Cranial Cavity", "q": "Which is a dural venous sinus?", "options": ["Superior sagittal sinus", "Maxillary sinus", "Frontal sinus", "Ethmoidal sinus"], "answer": 0}, {"n": 17, "topic": "The Cranial Cavity", "q": "The cavernous sinus is located on either side of the:", "options": ["Sella turcica", "Foramen magnum", "Mandible", "Nasal septum"], "answer": 0}, {"n": 18, "topic": "The Cranial Cavity", "q": "Which cranial nerve runs within the cavernous sinus alongside the internal carotid artery?", "options": ["Abducens nerve", "Optic nerve", "Facial nerve", "Hypoglossal nerve"], "answer": 0}, {"n": 19, "topic": "Contents of the Orbit", "q": "Which muscle is supplied by the oculomotor nerve?", "options": ["Medial rectus", "Lateral rectus", "Superior oblique", "Orbicularis oculi"], "answer": 0}, {"n": 20, "topic": "Contents of the Orbit", "q": "The optic nerve is cranial nerve:", "options": ["II", "III", "V", "VII"], "answer": 0}, {"n": 21, "topic": "Contents of the Orbit", "q": "The lateral rectus muscle is supplied by:", "options": ["Abducens nerve", "Oculomotor nerve", "Trochlear nerve", "Facial nerve"], "answer": 0}, {"n": 22, "topic": "The Anterior Triangle of Neck", "q": "The anterior triangle is bounded posteriorly by the:", "options": ["Anterior border of sternocleidomastoid", "Trapezius", "Clavicle only", "Mandible only"], "answer": 0}, {"n": 23, "topic": "The Anterior Triangle of Neck", "q": "The thyroid gland lies in the:", "options": ["Neck", "Cranial cavity", "Orbit", "Posterior mediastinum"], "answer": 0}, {"n": 24, "topic": "The Anterior Triangle of Neck", "q": "Which artery supplies the thyroid gland?", "options": ["Superior thyroid artery", "Radial artery", "Femoral artery", "Posterior auricular artery"], "answer": 0}, {"n": 25, "topic": "The Parotid Region", "q": "The parotid gland is the:", "options": ["Largest major salivary gland", "Smallest salivary gland", "Only mucous salivary gland", "Only gland in the orbit"], "answer": 0}, {"n": 26, "topic": "The Parotid Region", "q": "The facial nerve passes through the:", "options": ["Parotid gland", "Submandibular gland", "Thyroid gland", "Pituitary gland"], "answer": 0}, {"n": 27, "topic": "The Parotid Region", "q": "Secretomotor fibres to the parotid gland originate from the:", "options": ["Glossopharyngeal nerve", "Facial nerve", "Vagus nerve", "Hypoglossal nerve"], "answer": 0}, {"n": 28, "topic": "The Temporal & Infratemporal Regions", "q": "The temporomandibular joint is a:", "options": ["Synovial joint", "Fibrous joint", "Suture", "Cartilaginous synchondrosis"], "answer": 0}, {"n": 29, "topic": "The Temporal & Infratemporal Regions", "q": "Which is a muscle of mastication?", "options": ["Temporalis", "Buccinator", "Platysma", "Orbicularis oculi"], "answer": 0}, {"n": 30, "topic": "The Temporal & Infratemporal Regions", "q": "The mandibular nerve is the:", "options": ["Third division of trigeminal nerve", "Second division", "First division", "Seventh cranial nerve"], "answer": 0}, {"n": 31, "topic": "The Submandibular Region", "q": "The submandibular gland is a:", "options": ["Major salivary gland", "Lymph node", "Thyroid lobe", "Paranasal sinus"], "answer": 0}, {"n": 32, "topic": "The Submandibular Region", "q": "The submandibular ganglion is associated functionally with the:", "options": ["Lingual nerve", "Optic nerve", "Facial nerve trunk", "Accessory nerve"], "answer": 0}, {"n": 33, "topic": "The Submandibular Region", "q": "The submandibular duct opens near the:", "options": ["Frenulum of tongue", "Hard palate", "External ear", "Epiglottis"], "answer": 0}, {"n": 34, "topic": "Deep Structures in the Neck", "q": "The thyroid gland is located mainly in front of the:", "options": ["Trachea and larynx", "Mandible", "Orbit", "Spinal cord"], "answer": 0}, {"n": 35, "topic": "Deep Structures in the Neck", "q": "The glossopharyngeal nerve is cranial nerve:", "options": ["IX", "VII", "X", "XII"], "answer": 0}, {"n": 36, "topic": "Deep Structures in the Neck", "q": "The carotid sheath contains the common/internal carotid artery, internal jugular vein and:", "options": ["Vagus nerve", "Facial nerve", "Optic nerve", "Hypoglossal nerve"], "answer": 0}, {"n": 37, "topic": "The Prevertebral Region", "q": "Prevertebral muscles are located anterior to the:", "options": ["Vertebral column", "Mandible", "Thyroid gland", "Parotid gland"], "answer": 0}, {"n": 38, "topic": "The Prevertebral Region", "q": "The phrenic nerve arises mainly from:", "options": ["C3-C5", "C1-C2", "C6-T1", "T1-T4"], "answer": 0}, {"n": 39, "topic": "The Prevertebral Region", "q": "The prevertebral fascia is associated with the:", "options": ["Prevertebral muscles", "Parotid gland", "Orbit", "Tongue"], "answer": 0}, {"n": 40, "topic": "The Mouth & Pharynx", "q": "The soft palate contains muscles important in:", "options": ["Swallowing", "Vision", "Hearing only", "Knee movement"], "answer": 0}, {"n": 41, "topic": "The Mouth & Pharynx", "q": "Most muscles of the pharynx are supplied by the pharyngeal plexus mainly through the:", "options": ["Vagus nerve", "Optic nerve", "Facial nerve", "Hypoglossal nerve"], "answer": 0}, {"n": 42, "topic": "The Mouth & Pharynx", "q": "The palatine tonsil is located in the:", "options": ["Oropharynx", "Nasopharynx only", "Larynx", "Orbit"], "answer": 0}, {"n": 43, "topic": "The Nose & Paranasal Sinuses", "q": "Which is a paranasal sinus?", "options": ["Maxillary sinus", "Cavernous sinus", "Sigmoid sinus", "Superior sagittal sinus"], "answer": 0}, {"n": 44, "topic": "The Nose & Paranasal Sinuses", "q": "The nasal septum divides the nasal cavity into:", "options": ["Right and left halves", "Three parts", "Four parts", "Only superior and inferior parts"], "answer": 0}, {"n": 45, "topic": "The Nose & Paranasal Sinuses", "q": "The maxillary sinus drains into the:", "options": ["Middle meatus", "Inferior meatus", "External ear", "Oral cavity"], "answer": 0}, {"n": 46, "topic": "The Larynx", "q": "The larynx lies between the:", "options": ["Pharynx and trachea", "Nose and pharynx", "Oesophagus and stomach", "Bronchi and lungs"], "answer": 0}, {"n": 47, "topic": "The Larynx", "q": "The vocal cords are associated with production of:", "options": ["Voice", "Bile", "Urine", "CSF"], "answer": 0}, {"n": 48, "topic": "The Larynx", "q": "Motor supply to most intrinsic muscles of the larynx is by the:", "options": ["Recurrent laryngeal nerve", "Optic nerve", "Facial nerve", "Hypoglossal nerve"], "answer": 0}, {"n": 49, "topic": "The Tongue", "q": "The tongue has intrinsic muscles that mainly:", "options": ["Alter its shape", "Move the shoulder", "Move the eye", "Close the eyelid"], "answer": 0}, {"n": 50, "topic": "The Tongue", "q": "Most muscles of the tongue are supplied by the:", "options": ["Hypoglossal nerve", "Facial nerve", "Vagus nerve", "Accessory nerve"], "answer": 0}, {"n": 51, "topic": "The Tongue", "q": "The circumvallate papillae are located:", "options": ["Just anterior to the sulcus terminalis", "On the soft palate", "In the larynx", "On the epiglottis only"], "answer": 0}, {"n": 52, "topic": "Ear & Vestibulocochlear Nerve", "q": "The vestibulocochlear nerve is cranial nerve:", "options": ["VIII", "V", "VII", "IX"], "answer": 0}, {"n": 53, "topic": "Ear & Vestibulocochlear Nerve", "q": "The cochlear part of CN VIII is concerned with:", "options": ["Hearing", "Balance", "Smell", "Taste"], "answer": 0}, {"n": 54, "topic": "Ear & Vestibulocochlear Nerve", "q": "The vestibular part of CN VIII is concerned mainly with:", "options": ["Balance", "Hearing only", "Vision", "Speech production"], "answer": 0}, {"n": 55, "topic": "The Eyeball", "q": "The eyeball contains the:", "options": ["Lens", "Thyroid gland", "Parotid gland", "Pituitary gland"], "answer": 0}, {"n": 56, "topic": "The Eyeball", "q": "The retina is the:", "options": ["Light-sensitive inner layer", "Outer fibrous layer", "Middle muscular layer", "Salivary layer"], "answer": 0}, {"n": 57, "topic": "The Eyeball", "q": "The optic nerve leaves the eyeball at the:", "options": ["Optic disc", "Macula only", "Cornea", "Iris"], "answer": 0}, {"n": 58, "topic": "Surface Marking & Radiological Anatomy of Head & Neck", "q": "The pterion has surgical importance because of its relation to the:", "options": ["Middle meningeal artery", "Femoral artery", "Ulnar nerve", "Sciatic nerve"], "answer": 0}, {"n": 59, "topic": "Surface Marking & Radiological Anatomy of Head & Neck", "q": "Radiological anatomy commonly uses imaging to study:", "options": ["Anatomical structures", "Only blood groups", "Only genetics", "Only histology slides"], "answer": 0}, {"n": 60, "topic": "Surface Marking & Radiological Anatomy of Head & Neck", "q": "Surface marking means identifying anatomical structures on the:", "options": ["Body surface", "Microscope slide", "Blood film", "DNA sequence"], "answer": 0}, {"n": 61, "topic": "The Brain", "q": "The cerebral hemispheres are separated by the:", "options": ["Longitudinal cerebral fissure", "Central canal", "Optic canal", "Carotid sheath"], "answer": 0}, {"n": 62, "topic": "The Brain", "q": "The frontal lobe is primarily associated with:", "options": ["Motor and higher executive functions", "Hearing only", "Vision only", "Balance only"], "answer": 0}, {"n": 63, "topic": "The Brain", "q": "The fourth ventricle lies between the brainstem and:", "options": ["Cerebellum", "Thalamus", "Frontal lobe", "Pituitary gland"], "answer": 0}, {"n": 64, "topic": "Musculoskeletal / Miscellaneous", "q": "A lumbar puncture is usually performed in the lumbar region to obtain:", "options": ["Cerebrospinal fluid", "Bile", "Urine", "Saliva"], "answer": 0}, {"n": 65, "topic": "Musculoskeletal / Miscellaneous", "q": "A synovial joint is characterized by the presence of a:", "options": ["Joint cavity", "Suture line", "Fibrous cord only", "Bone marrow cavity"], "answer": 0}, {"n": 66, "topic": "Musculoskeletal / Miscellaneous", "q": "The epiphysis is a part of a:", "options": ["Long bone", "Flat bone only", "Tooth", "Cranial nerve"], "answer": 0}];
+let answers=Array(questions.length).fill(null);
+let submitted=false;
+let seconds=25*60;
+let timerId=null;
+
+const quiz=document.getElementById("quiz");
+const submitBtn=document.getElementById("submitBtn");
+const timerEl=document.getElementById("timer");
+const resultEl=document.getElementById("result");
+
+function esc(v){
+  return String(v).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+function render(){
+  quiz.innerHTML=questions.map((x,i)=>`
+    <section class="card">
+      <div class="topic">${esc(x.topic)}</div>
+      <p class="q">${i+1}. ${esc(x.q)}</p>
+      ${x.options.map((o,j)=>`
+        <label class="opt">
+          <input type="radio" name="q${i}" value="${j}" ${answers[i]===j?"checked":""}>
+          ${esc(o)}
+        </label>
+      `).join("")}
+    </section>
+  `).join("");
+
+  quiz.querySelectorAll("input[type=radio]").forEach(input=>{
+    input.addEventListener("change",()=>{
+      answers[Number(input.name.slice(1))]=Number(input.value);
+    });
+  });
+}
+
+function formatTime(){
+  const m=String(Math.floor(seconds/60)).padStart(2,"0");
+  const s=String(seconds%60).padStart(2,"0");
+  timerEl.textContent=`${m}:${s}`;
+  timerEl.classList.toggle("danger",seconds<=60);
+}
+
+function startTimer(){
+  formatTime();
+  timerId=setInterval(()=>{
+    if(submitted) return;
+    seconds--;
+    formatTime();
+    if(seconds<=0){
+      seconds=0;
+      formatTime();
+      submitTest(true);
+    }
+  },1000);
+}
+
+function circle(percent, label, type){
+  const safe=Math.max(0,Math.min(100,percent));
+  return `<div class="circle ${type}" style="--p:${safe}%">
+    <div class="inner">${safe.toFixed(1)}%<br><span class="muted">${label}</span></div>
+  </div>`;
+}
+
+function submitTest(auto=false){
+  if(submitted) return;
+  submitted=true;
+  clearInterval(timerId);
+
+  let correct=0;
+  const review=[];
+
+  questions.forEach((x,i)=>{
+    const isCorrect=answers[i]===x.answer;
+    if(isCorrect) correct++;
+    review.push({x,i,isCorrect});
+  });
+
+  const wrong=questions.length-correct;
+  const correctPct=correct/questions.length*100;
+  const wrongPct=wrong/questions.length*100;
+
+  resultEl.innerHTML=`
+    <div class="resultbox">
+      <div class="score">Score: ${correct} / ${questions.length}</div>
+      <div class="${auto?"timeup":"muted"}">${auto?"⏰ Time is up — the test was submitted automatically.":"✅ Test submitted."}</div>
+      <div class="stats">
+        ${circle(correctPct,"Correct","green")}
+        ${circle(wrongPct,"Wrong","red")}
+      </div>
+      <p><b>${correct}</b> correct &nbsp;•&nbsp; <b>${wrong}</b> wrong</p>
+      <p class="muted">Your selected answer and the correct answer are shown below for every question.</p>
+    </div>
+
+    <div class="resultbox review">
+      <h2>Answer Review</h2>
+      ${review.map(({x,i,isCorrect})=>`
+        <div class="reviewitem ${isCorrect?"correct":"wrong"}">
+          <div class="badge ${isCorrect?"correct":"wrong"}">${isCorrect?"✓ Correct":"✕ Wrong"}</div>
+          <div><b>${i+1}. ${esc(x.q)}</b></div>
+          <div class="muted">Your answer: <b>${answers[i]===null?"Not answered":esc(x.options[answers[i]])}</b></div>
+          <div>Correct answer: <b>${esc(x.options[x.answer])}</b></div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+
+  document.querySelectorAll("input").forEach(el=>el.disabled=true);
+  submitBtn.disabled=true;
+
+  if(auto){
+    // Browsers normally block window.close() unless this page was opened by script.
+    // Attempt it, then keep the completed result visible if the browser refuses.
+    try{ window.close(); }catch(e){}
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+submitBtn.addEventListener("click",()=>submitTest(false));
+render();
+startTimer();
+</script>
+</body>
+</html>
